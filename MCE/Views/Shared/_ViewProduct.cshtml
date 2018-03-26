@@ -1,0 +1,47 @@
+﻿@model MCE.Models.tblProduct
+
+@using (@Html.BeginForm("SaveProduct", "App", FormMethod.Post, new { @id = "SaveUnitForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-12 nopadding">
+            <div class="col-sm-12">
+                <label class="col-sm-6">Product name:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.name)</div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-sm-12">
+                <label class="col-sm-6">Code:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.number)</div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-sm-12">
+                <label class="col-sm-6">Description:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.description)</div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-sm-12">
+                <label class="col-sm-6">Unit:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.idunit)</div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-sm-12">
+                <label class="col-sm-6">Minimum quantity in stock:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.minquantity)</div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+
+            <div class="col-sm-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-white waves-light" onclick="CloseModal('view-modal')">Close</button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+}
