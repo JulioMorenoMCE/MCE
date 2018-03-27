@@ -134,5 +134,28 @@ namespace MCE.Services
                 }
             }
         }
+        public bool SaveChangesInventory(tblInventory model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    tblInventory item = _db.Inventories.Where(x => x.id == model.id).FirstOrDefault();
+                    item.name = model.name;
+                    item.asset = model.asset;
+                    item.username = model.username;
+                    item.tight = model.tight;
+                    item.description = model.description;
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
     }
 }

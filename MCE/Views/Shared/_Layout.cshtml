@@ -6,9 +6,9 @@
     <title>Motion Control Engineering</title>
     <link rel="shortcut icon" href="~/Content/assets/images/itkafav.png">
     <link rel="stylesheet" href="~/Content/assets/plugins/morris/morris.css">
-    
 
-    
+
+
     <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/assets/css/core.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/assets/css/components.css" rel="stylesheet" type="text/css" />
@@ -35,16 +35,18 @@
         <div class="left side-menu">
             <div class="slimScrollDiv">
                 <div class="sidebar-inner slimscrollleft">
+
+
                     <!--- Divider -->
                     <div id="sidebar-menu">
                         <ul>
                             <li><a href="/App/Index" class="waves-effect"><i class="ti-stats-up"></i> <span> Index </span></a></li>
                             <li><a href="/App/Products" class="waves-effect"><i class="ti-car"></i> <span> Products </span></a></li>
                             <li><a href="/App/Clients" class="waves-effect"><i class="ti-user"></i> <span> Clients </span></a></li>
-                            <li><a href="/App/Suppliers" class="waves-effect"><i class="ti-support"></i> <span> Suppliers </span></a></li>
+                            <li><a href="/App/Suppliers" class="waves-effect"><i class="ti-linux"></i> <span> Suppliers </span></a></li>
                             <li><a href="/App/Warehouses" class="waves-effect"><i class="ti-support"></i> <span> Warehouses </span></a></li>
                             <li><a href="/App/Units" class="waves-effect"><i class="ti-package"></i> <span> Units </span></a></li>
-
+                            <li><a href="/App/Inventory" class="waves-effect"><i class="ti-list"></i> <span> Inventories </span></a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -244,6 +246,26 @@
                 columns: [
                     { "data": "name", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
                     { "data": "address" },
+                    { "data": "description" },
+                    { "data": "actions" }
+                ],
+            });
+            $('#InventoriesTbl').dataTable({
+                "bInfo": false,
+                ajax: {
+                    url: '/App/GetInventories',
+                    contentType: "application/json; charset=utf-8",
+                    complete: function (data) {
+                    }
+                },
+                pageLength: 10,
+                processing: true,
+                serverSide: true,
+                columns: [
+                    { "data": "name", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
+                    { "data": "asset" },
+                    { "data": "username" },
+                    { "data": "tight" },
                     { "data": "description" },
                     { "data": "actions" }
                 ],

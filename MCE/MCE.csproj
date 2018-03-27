@@ -240,6 +240,7 @@
     <Compile Include="Models\tblEntry.cs" />
     <Compile Include="Models\tblEvent.cs" />
     <Compile Include="Models\tblExit.cs" />
+    <Compile Include="Models\tblInventory.cs" />
     <Compile Include="Models\tblProduct.cs" />
     <Compile Include="Models\tblSupplier.cs" />
     <Compile Include="Models\tblUnit.cs" />
@@ -899,6 +900,7 @@
     <Content Include="Content\frontend\style.css" />
     <Content Include="Content\frontend\svg\fonts\icomoon64f7.svg" />
     <Content Include="Content\frontend\svg\style.css" />
+    <Content Include="Control.ico" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1118,6 +1120,10 @@
     <Content Include="Views\App\Entries.cshtml" />
     <Content Include="Views\App\Exits.cshtml" />
     <Content Include="Views\App\AppSettings.cshtml" />
+    <Content Include="Views\App\Inventories.cshtml" />
+    <Content Include="Views\Shared\_CreateInventory.cshtml" />
+    <Content Include="Views\Shared\_EditInventory.cshtml" />
+    <Content Include="Views\Shared\_ViewInventory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1133,6 +1139,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Control.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -37,5 +37,9 @@ namespace MCE.Services
         {
             return _db.Warehouses.Where(x => x.id == id).FirstOrDefault();
         }
+        public tblInventory InventoryDetails(int id)
+        {
+            return _db.Inventories.Where(x => x.id == id).FirstOrDefault();
+        }
     }
 }

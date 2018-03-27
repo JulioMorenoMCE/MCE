@@ -27,6 +27,7 @@ namespace MCE.Data
         public DbSet<tblEntry> Entries { get; set; }
         public DbSet<tblExit> Exits { get; set; }
         public DbSet<tblWarehouse> Warehouses { get; set; }
+        public DbSet<tblInventory> Inventories { get; set; }
         public DbSet SetTbl(string name)
         {
             // you may need to fill in the namespace of your context

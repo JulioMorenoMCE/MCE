@@ -1,0 +1,55 @@
+﻿@model MCE.Models.tblInventory
+
+@using (@Html.BeginForm("SaveInventory", "App", FormMethod.Post, new { @id = "SaveChangesInventoryForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="form-group">
+                <label class="col-md-12 pull-left">PC Model<span style="color:red;">*</span></label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required", @data_bv_notempty_message = "The name can not be left empty!", Value = Model.name } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12 pull-left">Asset Tag<span style="color:red;">*</span></label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.asset, new { htmlAttributes = new { @class = "form-control", required = "required", @data_bv_notempty_message = "The surname can not be left empty!", Value = Model.asset } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12 pull-left">Username</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", Value = Model.username } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12 pull-left">TightVNC Service</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.tight, new { htmlAttributes = new { @class = "form-control", Value = Model.tight } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12">
+                    Description / Notes
+                </label>
+                <div class="col-md-12">
+                    <div class="clearfix"></div>
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", Value = Model.description } })
+                    @Html.HiddenFor(model => model.status, new { Value = true })
+                    @Html.HiddenFor(model => model.id, new { Value = Model.id })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-white waves-light" onclick="CloseModal('update-modal')">Cancel</button>&nbsp;
+                        <button type="button" class="btn btn-warning pull-right" data-id="SaveChangesInventoryForm" data-url="UpdateInventory" data-table="InventoriesTbl" onclick="SubmitEditForm(this)">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

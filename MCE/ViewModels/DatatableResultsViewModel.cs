@@ -23,5 +23,9 @@ namespace MCE.ViewModels
         public DateTime datecreated { get; set; }
         public bool status { get; set; }
         public string actions { get; set; }
+        public string asset { get; set; }
+        public string username { get; set; }
+        public string tight { get; set; }
+
     }
 }

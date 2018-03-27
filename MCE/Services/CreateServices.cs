@@ -105,5 +105,23 @@ namespace MCE.Services
                 }
             }
         }
+        public bool SaveInventory(tblInventory model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    _db.Inventories.Add(model);
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
     }
 }
