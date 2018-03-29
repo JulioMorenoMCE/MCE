@@ -130,6 +130,44 @@ namespace MCE.Services
                 }
             }
         }
+        public bool DeleteFloor(int id)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var usr = _db.Floors.Where(x => x.id == id).First();
+                    usr.status = false;
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
+        public bool DeleteReport(int id)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var usr = _db.Reports.Where(x => x.id == id).First();
+                    usr.status = false;
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
         public bool DeleteExit(int id)
         {
             using (var dbContextTransaction = _db.Database.BeginTransaction())

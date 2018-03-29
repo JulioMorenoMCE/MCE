@@ -40,6 +40,18 @@ namespace MCE.Services
         {
             return _db.Inventories.Where(x => x.status == true).ToList();
         }
+        public IEnumerable<tblFloor> GetFloors()
+        {
+            return _db.Floors.Where(x => x.status == true).ToList();
+        }
+        public IEnumerable<tblReport> GetReports()
+        {
+            return _db.Reports.Where(x => x.status == true).ToList();
+        }
+
+
+
+
         public IEnumerable<tblUnit> GetUnitsDatatable(string st, string ln, string search)
         {
             int _skip = Int32.Parse(st);
@@ -81,6 +93,24 @@ namespace MCE.Services
             int _skip = Int32.Parse(st);
             int _take = Int32.Parse(ln);
             IEnumerable<tblInventory> items = (from item in _db.Inventories
+                                               where item.status == true && (item.name.ToLower().Contains(search.ToLower()) || search == "")
+                                               select item).OrderBy(x => x.name).Skip(_skip).Take(_take).ToList();
+            return items;
+        }
+        public IEnumerable<tblFloor> GetFloorsDatatable(string st, string ln, string search)
+        {
+            int _skip = Int32.Parse(st);
+            int _take = Int32.Parse(ln);
+            IEnumerable<tblFloor> items = (from item in _db.Floors
+                                               where item.status == true && (item.Job.ToLower().Contains(search.ToLower()) || search == "")
+                                               select item).OrderBy(x => x.Job).Skip(_skip).Take(_take).ToList();
+            return items;
+        }
+        public IEnumerable<tblReport> GetReportsDatatable(string st, string ln, string search)
+        {
+            int _skip = Int32.Parse(st);
+            int _take = Int32.Parse(ln);
+            IEnumerable<tblReport> items = (from item in _db.Reports
                                                where item.status == true && (item.name.ToLower().Contains(search.ToLower()) || search == "")
                                                select item).OrderBy(x => x.name).Skip(_skip).Take(_take).ToList();
             return items;

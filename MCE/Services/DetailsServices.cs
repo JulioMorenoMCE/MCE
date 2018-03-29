@@ -41,5 +41,13 @@ namespace MCE.Services
         {
             return _db.Inventories.Where(x => x.id == id).FirstOrDefault();
         }
+        public tblFloor FloorDetails(int id)
+        {
+            return _db.Floors.Where(x => x.id == id).FirstOrDefault();
+        }
+        public tblReport ReportDetails(int id)
+        {
+            return _db.Reports.Where(x => x.id == id).FirstOrDefault();
+        }
     }
 }

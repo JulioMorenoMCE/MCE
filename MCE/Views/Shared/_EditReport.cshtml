@@ -1,15 +1,22 @@
-﻿@model MCE.Models.tblUnit
+﻿@model MCE.Models.tblReport
 
-@using (@Html.BeginForm("SaveUnit", "App", FormMethod.Post, new { @id = "SaveChangesUnitForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
+@using (@Html.BeginForm("SaveReport", "App", FormMethod.Post, new { @id = "SaveChangesReportForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
 {
     @Html.AntiForgeryToken()
     <div class="">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="col-sm-8 col-sm-offset-2">
             <div class="form-group">
-                <label class="col-md-12 pull-left">Unit Name<span style="color:red;">*</span></label>
+                <label class="col-md-12 pull-left">Report Name<span style="color:red;">*</span></label>
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", Value = Model.name, required = "required", @data_bv_notempty_message = "The name can not be left empty!" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12 pull-left">Code<span style="color:red;">*</span></label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control", Value = Model.code } })
                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -26,11 +33,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <br />
-
                 <div class="col-md-12">
                     <div class="pull-right">
                         <button type="button" class="btn btn-white waves-light" onclick="CloseModal('update-modal')">Cancel</button>&nbsp;
-                        <button type="button" class="btn btn-warning pull-right" data-id="SaveChangesUnitForm" data-url="UpdateUnit" data-table="UnitsTbl" onclick="SubmitEditForm(this)">Save changes</button>
+                        <button type="button" class="btn btn-warning pull-right" data-id="SaveChangesReportForm" data-url="UpdateReport" data-table="ReportsTbl" onclick="SubmitEditForm(this)">Save Changes</button>
                     </div>
                 </div>
             </div>

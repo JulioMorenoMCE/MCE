@@ -47,6 +47,14 @@ namespace MCE.Controllers
         {
             return View("Inventories");
         }
+        public ActionResult Floor()
+        {
+            return View("Floors");
+        }
+        public ActionResult Report()
+        {
+            return View("Reports");
+        }
 
 
 
@@ -110,7 +118,7 @@ namespace MCE.Controllers
                         surname = item.surname,
                         email = item.email,
                         phone1 = item.phone1,
-                        nipt = item.nipt,
+                        code = item.code,
                         actions = _actions
                     };
                     jsonResult.Add(itm);
@@ -146,8 +154,8 @@ namespace MCE.Controllers
                         name = item.name,
                         surname = item.surname,
                         email = item.email,
-                        phone1 = item.phone1,
-                        nipt = item.nipt,
+                        phone = item.phone,
+                        code = item.code,
                         actions = _actions
                     };
                     jsonResult.Add(itm);
@@ -243,7 +251,7 @@ namespace MCE.Controllers
                     var _actions = "";
                     _actions += "<span class='pull-right'>";
                     _actions += "<button class='btn btn-icon waves-effect waves-light btn-success' data-url='ViewInventory'  data-subject='Inventario " + item.name + "' data-table='InventoriesTbl' data-id='" + item.id + "' onclick='GetViewModal(this)'><i class='fa fa-eye'></i></button>&nbsp;&nbsp;";
-                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-warning' data-url='EditInventory'  data-subject='Invantario " + item.name + "' data-table='InventoriesTbl' data-id='" + item.id + "' data-form='SaveChangesWarehouseForm' onclick='GetEditModal(this)'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-warning' data-url='EditInventory'  data-subject='Invantario " + item.name + "' data-table='InventoriesTbl' data-id='" + item.id + "' data-form='SaveChangesInventoryForm' onclick='GetEditModal(this)'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;";
                     _actions += "<button class='btn btn-icon waves-effect waves-light btn-danger' data-url='DeleteInventory' data-subject='Inventario " + item.name + "' data-table='InventoriesTbl' data-id='" + item.id + "' onclick='GetDeleteSwal(this)'><i class='fa fa-trash'></i></button>&nbsp;&nbsp;";
                     _actions += " </span>";
                     DatatableResultsViewModel itm = new DatatableResultsViewModel()
@@ -267,6 +275,81 @@ namespace MCE.Controllers
                 return null;
             }
         }
+        public async Task<JsonResult> GetFloors(string start, string length, string order, string search)
+        {
+            try
+            {
+                var searchkey = Request.QueryString["search[value]"];
+                var services = new RetrieveServices();
+                var model = services.GetFloorsDatatable(start, length, searchkey);
+                List<DatatableResultsViewModel> jsonResult = new List<DatatableResultsViewModel>();
+                foreach (var item in model)
+                {
+                    var _actions = "";
+                    _actions += "<span class='pull-right'>";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-success' data-url='ViewFloor'  data-subject='Production " + item.Job + "' data-table='FloorsTbl' data-id='" + item.id + "' onclick='GetViewModal(this)'><i class='fa fa-eye'></i></button>&nbsp;&nbsp;";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-warning' data-url='EditFloor'  data-subject='Production " + item.Job + "' data-table='FloorsTbl' data-id='" + item.id + "' data-form='SaveChangesFloorForm' onclick='GetEditModal(this)'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-danger' data-url='DeleteFloor' data-subject='Production " + item.Job + "' data-table='FloorsTbl' data-id='" + item.id + "' onclick='GetDeleteSwal(this)'><i class='fa fa-trash'></i></button>&nbsp;&nbsp;";
+                    _actions += " </span>";
+                    DatatableResultsViewModel itm = new DatatableResultsViewModel()
+                    {
+                        id = item.id,
+                        Job = item.Job,
+                        Technician = item.Technician,
+                        Stage = item.Stage,
+                        Status = item.Status,
+                        CAT = item.CAT,
+                        ST = item.ST,
+                        TTC = item.TTC,
+                        description = item.description,
+                        actions = _actions,
+
+                    };
+                    jsonResult.Add(itm);
+
+                }
+                return Json(new { data = jsonResult }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<JsonResult> GetReports(string start, string length, string order, string search)
+        {
+            try
+            {
+                var searchkey = Request.QueryString["search[value]"];
+                var services = new RetrieveServices();
+                var model = services.GetReportsDatatable(start, length, searchkey);
+                List<DatatableResultsViewModel> jsonResult = new List<DatatableResultsViewModel>();
+                foreach (var item in model)
+                {
+                    var _actions = "";
+                    _actions += "<span class='pull-right'>";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-success' data-url='ViewReport'  data-subject='Reporte " + item.name + "' data-table='ReportsTbl' data-id='" + item.id + "' onclick='GetViewModal(this)'><i class='fa fa-eye'></i></button>&nbsp;&nbsp;";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-warning' data-url='EditReport'  data-subject='Reporte " + item.name + "' data-table='ReportsTbl' data-id='" + item.id + "' data-form='SaveChangesReportForm' onclick='GetEditModal(this)'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;";
+                    _actions += "<button class='btn btn-icon waves-effect waves-light btn-danger' data-url='DeleteReport' data-subject='Reporte " + item.name + "' data-table='ReportsTbl' data-id='" + item.id + "' onclick='GetDeleteSwal(this)'><i class='fa fa-trash'></i></button>&nbsp;&nbsp;";
+                    _actions += " </span>";
+                    DatatableResultsViewModel itm = new DatatableResultsViewModel()
+                    {
+                        id = item.id,
+                        name = item.name,
+                        code = item.code,
+                        description = item.description,
+                        actions = _actions
+                    };
+                    jsonResult.Add(itm);
+
+                }
+                return Json(new { data = jsonResult }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
 
 
@@ -340,6 +423,28 @@ namespace MCE.Controllers
             else
                 return Json(new { success = false });
         }
+        [HttpPost]
+        public JsonResult DeleteFloor(int id)
+        {
+            var service = new DeleteServices();
+            var res = service.DeleteFloor(id);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult DeleteReport(int id)
+        {
+            var service = new DeleteServices();
+            var res = service.DeleteReport(id);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
 
 
 
@@ -374,6 +479,14 @@ namespace MCE.Controllers
         public ActionResult CreateInventory()
         {
             return PartialView("_CreateInventory");
+        }
+        public ActionResult CreateFloor()
+        {
+            return PartialView("_CreateFloor");
+        }
+        public ActionResult CreateReport()
+        {
+            return PartialView("_CreateReport");
         }
 
 
@@ -447,6 +560,28 @@ namespace MCE.Controllers
             else
                 return Json(new { success = false });
         }
+        [HttpPost]
+        public JsonResult SaveFloor(tblFloor model)
+        {
+            var service = new CreateServices();
+            var res = service.SaveFloor(model);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult SaveReport(tblReport model)
+        {
+            var service = new CreateServices();
+            var res = service.SaveReport(model);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
 
 
 
@@ -495,6 +630,20 @@ namespace MCE.Controllers
             var model = services.InventoryDetails(id);
             return PartialView("_ViewInventory", model);
         }
+        [HttpPost]
+        public ActionResult ViewFloor(int id)
+        {
+            var services = new DetailsServices();
+            var model = services.FloorDetails(id);
+            return PartialView("_ViewFloor", model);
+        }
+        [HttpPost]
+        public ActionResult ViewReport(int id)
+        {
+            var services = new DetailsServices();
+            var model = services.ReportDetails(id);
+            return PartialView("_ViewReport", model);
+        }
 
 
 
@@ -542,6 +691,20 @@ namespace MCE.Controllers
             var services = new DetailsServices();
             var model = services.InventoryDetails(id);
             return PartialView("_EditInventory", model);
+        }
+        [HttpPost]
+        public ActionResult EditFloor(int id)
+        {
+            var services = new DetailsServices();
+            var model = services.FloorDetails(id);
+            return PartialView("_EditFloor", model);
+        }
+        [HttpPost]
+        public ActionResult EditReport(int id)
+        {
+            var services = new DetailsServices();
+            var model = services.ReportDetails(id);
+            return PartialView("_EditReport", model);
         }
 
 
@@ -609,6 +772,28 @@ namespace MCE.Controllers
         {
             var service = new UpdateServices();
             var res = service.SaveChangesInventory(model);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult UpdateFloor(tblFloor model)
+        {
+            var service = new UpdateServices();
+            var res = service.SaveChangesFloor(model);
+            if (res)
+                return Json(new { success = true });
+
+            else
+                return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult UpdateReport(tblReport model)
+        {
+            var service = new UpdateServices();
+            var res = (bool)service.SaveChangesReport(model);
             if (res)
                 return Json(new { success = true });
 

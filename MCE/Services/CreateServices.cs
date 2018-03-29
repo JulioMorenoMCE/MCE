@@ -123,5 +123,41 @@ namespace MCE.Services
                 }
             }
         }
+        public bool SaveFloor(tblFloor model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    _db.Floors.Add(model);
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
+        public bool SaveReport(tblReport model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    _db.Reports.Add(model);
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
     }
 }

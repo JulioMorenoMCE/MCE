@@ -71,9 +71,8 @@ namespace MCE.Services
                     item.email = model.email;
                     item.description = model.description;
                     item.company = model.company;
-                    item.nipt = model.nipt;
-                    item.phone1 = model.phone1;
-                    item.phone2 = model.phone2;
+                    item.code = model.code;
+                    item.phone = model.phone;
                     item.address = model.address;
                     _db.SaveChanges();
                     dbContextTransaction.Commit();
@@ -98,7 +97,7 @@ namespace MCE.Services
                     item.email = model.email;
                     item.description = model.description;
                     item.company = model.company;
-                    item.nipt = model.nipt;
+                    item.code = model.code;
                     item.phone1 = model.phone1;
                     item.phone2 = model.phone2;
                     item.address = model.address;
@@ -145,6 +144,54 @@ namespace MCE.Services
                     item.asset = model.asset;
                     item.username = model.username;
                     item.tight = model.tight;
+                    item.description = model.description;
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
+        public bool SaveChangesFloor(tblFloor model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    tblFloor item = _db.Floors.Where(x => x.id == model.id).FirstOrDefault();
+                    item.Job = model.Job;
+                    item.Technician = model.Technician;
+                    item.Stage = model.Stage;
+                    item.Status = model.Status;
+                    item.CAT = model.CAT;
+                    item.ST = model.ST;
+                    item.TTC = model.TTC;
+                    item.description = model.description;
+                    _db.SaveChanges();
+                    dbContextTransaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    dbContextTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
+
+        public bool SaveChangesReport(tblReport model)
+        {
+            using (var dbContextTransaction = _db.Database.BeginTransaction())
+            {
+                try
+                {
+                    tblReport item = _db.Reports.Where(x => x.id == model.id).FirstOrDefault();
+                    item.name = model.name;
+                    item.code = model.code;
                     item.description = model.description;
                     _db.SaveChanges();
                     dbContextTransaction.Commit();

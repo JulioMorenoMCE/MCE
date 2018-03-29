@@ -41,12 +41,14 @@
                     <div id="sidebar-menu">
                         <ul>
                             <li><a href="/App/Index" class="waves-effect"><i class="ti-stats-up"></i> <span> Index </span></a></li>
+                            <li><a href="/App/Floor" class="waves-effect"><i class="ti-server"></i> <span> Production Floor </span></a></li>
                             <li><a href="/App/Products" class="waves-effect"><i class="ti-car"></i> <span> Products </span></a></li>
                             <li><a href="/App/Clients" class="waves-effect"><i class="ti-user"></i> <span> Clients </span></a></li>
                             <li><a href="/App/Suppliers" class="waves-effect"><i class="ti-linux"></i> <span> Suppliers </span></a></li>
                             <li><a href="/App/Warehouses" class="waves-effect"><i class="ti-support"></i> <span> Warehouses </span></a></li>
                             <li><a href="/App/Units" class="waves-effect"><i class="ti-package"></i> <span> Units </span></a></li>
                             <li><a href="/App/Inventory" class="waves-effect"><i class="ti-list"></i> <span> Inventories </span></a></li>
+                            <li><a href="/App/Report" class="waves-effect"><i class="ti-cloud"></i> <span> Reports </span></a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -111,6 +113,8 @@
     </div><!-- /.modal -->
     @RenderSection("scripts", required: false)
 
+
+    <script src="~/Content/assets/js/modernizr-custom.js"></script>
     <script src="~/Content/assets/js/jquery.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
     @*<script src="~/Content/assets/plugins/jquery-ui/jquery-ui.min.js"></script>*@
@@ -168,8 +172,8 @@
                     { "data": "name", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
                     { "data": "surname", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
                     { "data": "company", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
-                    { "data": "nipt" },
-                    { "data": "phone1" },
+                    { "data": "code" },
+                    { "data": "phone" },
                     { "data": "email" },
                     { "data": "actions" }
                 ],
@@ -209,8 +213,9 @@
                     { "data": "company", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
                     { "data": "name", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
                     { "data": "surname", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
-                    { "data": "nipt" },
+                    { "data": "code" },
                     { "data": "phone1" },
+                    { "data": "phone2" },
                     { "data": "email" },
                     { "data": "actions" }
                 ],
@@ -266,6 +271,47 @@
                     { "data": "asset" },
                     { "data": "username" },
                     { "data": "tight" },
+                    { "data": "description" },
+                    { "data": "actions" }
+                ],
+            });
+            $('#FloorsTbl').dataTable({
+                "bInfo": false,
+                ajax: {
+                    url: '/App/GetFloors',
+                    contentType: "application/json; charset=utf-8",
+                    complete: function (data) {
+                    }
+                },
+                pageLength: 10,
+                processing: true,
+                serverSide: true,
+                columns: [
+                    { "data": "Job", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
+                    { "data": "Technician" },
+                    { "data": "Stage" },
+                    { "data": "Status" },
+                    { "data": "CAT" },
+                    { "data": "ST" },
+                    { "data": "TTC" },
+                    { "data": "description" },
+                    { "data": "actions" }
+                ],
+            });
+            $('#ReportsTbl').dataTable({
+                "bInfo": false,
+                ajax: {
+                    url: '/App/GetReports',
+                    contentType: "application/json; charset=utf-8",
+                    complete: function (data) {
+                    }
+                },
+                pageLength: 10,
+                processing: true,
+                serverSide: true,
+                columns: [
+                    { "data": "name", "searchable": true, "orderable": true, "search": { "value": "", "regex": true } },
+                    { "data": "code" },
                     { "data": "description" },
                     { "data": "actions" }
                 ],

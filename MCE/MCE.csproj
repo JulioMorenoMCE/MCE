@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>it</RootNamespace>
-    <AssemblyName>it</AssemblyName>
+    <RootNamespace>MCE</RootNamespace>
+    <AssemblyName>MCE</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -240,8 +240,10 @@
     <Compile Include="Models\tblEntry.cs" />
     <Compile Include="Models\tblEvent.cs" />
     <Compile Include="Models\tblExit.cs" />
+    <Compile Include="Models\tblFloor.cs" />
     <Compile Include="Models\tblInventory.cs" />
     <Compile Include="Models\tblProduct.cs" />
+    <Compile Include="Models\tblReport.cs" />
     <Compile Include="Models\tblSupplier.cs" />
     <Compile Include="Models\tblUnit.cs" />
     <Compile Include="Models\tblWarehouse.cs" />
@@ -1124,6 +1126,14 @@
     <Content Include="Views\Shared\_CreateInventory.cshtml" />
     <Content Include="Views\Shared\_EditInventory.cshtml" />
     <Content Include="Views\Shared\_ViewInventory.cshtml" />
+    <Content Include="Views\App\Floors.cshtml" />
+    <Content Include="Views\Shared\_CreateFloor.cshtml" />
+    <Content Include="Views\Shared\_EditFloor.cshtml" />
+    <Content Include="Views\Shared\_ViewFloor.cshtml" />
+    <Content Include="Views\App\Reports.cshtml" />
+    <Content Include="Views\Shared\_CreateReport.cshtml" />
+    <Content Include="Views\Shared\_EditReport.cshtml" />
+    <Content Include="Views\Shared\_ViewReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,5 @@
-﻿@model MCE.Models.tblWarehouse
-@using (@Html.BeginForm("SaveWarehouse", "App", FormMethod.Post, new { @id = "SaveWarehouseForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
+﻿@model MCE.Models.tblReport
+@using (@Html.BeginForm("SaveReport", "App", FormMethod.Post, new { @id = "SaveReportForm", enctype = "multipart/form-data", @data_toggle = "validator" }))
 {
     @Html.AntiForgeryToken()
     <div class="">
@@ -12,8 +12,8 @@
             <div class="clearfix"></div>
             <br />
             <div class="col-sm-12">
-                <label class="col-sm-6">Address:</label>
-                <div class="col-sm-6">@Html.DisplayFor(model => model.address)</div>
+                <label class="col-sm-6">Code:</label>
+                <div class="col-sm-6">@Html.DisplayFor(model => model.code)</div>
             </div>
             <div class="clearfix"></div>
             <br />
